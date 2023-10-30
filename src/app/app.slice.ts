@@ -28,7 +28,7 @@ const slice = createSlice({
           state.isLoading = true;
         }
       )
-      .addMatcher(
+      /*.addMatcher(
         (action) => action.type.endsWith("/rejected"),
         (state, action) => {
           const err = action.payload as Error | AxiosError<{ error: string }>;
@@ -39,7 +39,7 @@ const slice = createSlice({
           }
           state.isLoading = false;
         }
-      )
+      )*/
       .addMatcher(
         (action) => action.type.endsWith("/fulfilled"),
         (state) => {
@@ -51,3 +51,4 @@ const slice = createSlice({
 
 export const appReducer = slice.reducer;
 export const appActions = slice.actions;
+
