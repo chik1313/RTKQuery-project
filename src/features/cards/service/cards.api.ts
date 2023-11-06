@@ -25,7 +25,7 @@ export const cardsApi = createApi({
             addCard: build.mutation<AddCardResponseType, ArgCreateCardType>({
                 query: (card) => {
                     return {
-                        method: "POST",
+                        method: "POSTю",
                         url: "cards/card",
                         body: {
                             card
