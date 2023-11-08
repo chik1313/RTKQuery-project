@@ -50,3 +50,14 @@ export type AddCardResponseType = {
     token: string;
     tokenDeathTime: number;
 };
+
+export type ArgGetCardsType = {
+    packId: string;
+    page?: number;
+    pageCount?: number;
+};
+export type DeleteCardResponseType = {
+    deletedCard: CardType;
+    token: string;
+    tokenDeathTime: number;
+};
