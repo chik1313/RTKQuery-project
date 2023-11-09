@@ -33,17 +33,6 @@ export type FetchCardsResponseType = {
 
 type CardGradeType = 0 | 1 | 2 | 3 | 4 | 5;
 
-export type ArgCreateCardType = {
-    cardsPack_id: string;
-    question?: string;
-    answer?: string;
-    grade?: CardGradeType;
-    shots?: number;
-    answerImg?: string;
-    questionImg?: string;
-    questionVideo?: string;
-    answerVideo?: string;
-};
 
 export type AddCardResponseType = {
     newCard: CardType;
@@ -61,3 +50,18 @@ export type DeleteCardResponseType = {
     token: string;
     tokenDeathTime: number;
 };
+type CreateUpdateCardType = {
+    _id: string;
+    cardsPack_id: string;
+    question?: string;
+    answer?: string;
+    grade?: CardGradeType;
+    shots?: number;
+    answerImg?: string;
+    questionImg?: string;
+    questionVideo?: string;
+    answerVideo?: string;
+};
+
+export type ArgCreateCardType = Omit<CreateUpdateCardType, "_id">;
+export type ArgUpdateCardType = Omit<CreateUpdateCardType, "cardsPack_id">;

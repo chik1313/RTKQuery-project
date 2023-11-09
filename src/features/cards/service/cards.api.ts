@@ -1,9 +1,8 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {baseURL} from "../../../common/api/common.api";
 import {
-    AddCardResponseType,
-    ArgCreateCardType,
-    ArgGetCardsType,
+    AddCardResponseType, ArgCreateCardType,
+    ArgGetCardsType, ArgUpdateCardType,
     DeleteCardResponseType,
     FetchCardsResponseType
 } from "./types";
@@ -14,7 +13,7 @@ export const cardsApi = createApi({
         baseUrl: baseURL,
         credentials: "include"
     }),
-    tagTypes: ["Card","User"],
+    tagTypes: ["Card"],
     endpoints: (build) => {
         return {
             getCards: build.query<FetchCardsResponseType, ArgGetCardsType>({
@@ -53,8 +52,20 @@ export const cardsApi = createApi({
                 },
                 invalidatesTags: ["Card"],
             }),
+            updateCard: build.mutation<any, ArgUpdateCardType>({
+                query: (card) => {
+                    return {
+                        method: "PUT",
+                        url: "cards/card",
+                        body: {
+                            card,
+                        },
+                    };
+                },
+                invalidatesTags: ["Card"],
+            }),
         };
     },
 })
 
-export const { useGetCardsQuery, useAddCardMutation, useDeleteCardMutation} = cardsApi
+export const { useGetCardsQuery, useAddCardMutation, useDeleteCardMutation,useUpdateCardMutation} = cardsApi

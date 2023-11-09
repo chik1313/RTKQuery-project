@@ -1,8 +1,13 @@
 import {useParams} from "react-router-dom";
-import {useAddCardMutation, useDeleteCardMutation, useGetCardsQuery} from "../../service/cards.api";
+import {
+    useAddCardMutation,
+    useDeleteCardMutation,
+    useGetCardsQuery,
+    useUpdateCardMutation
+} from "../../service/cards.api";
 import LinearProgress from "@mui/material/LinearProgress";
 import {nanoid} from "@reduxjs/toolkit";
-import {ArgCreateCardType} from "../../service/types";
+import {ArgCreateCardType, CardType} from "../../service/types";
 import {toast} from "react-toastify";
 import {ChangeEvent, useState} from "react";
 import {Pagination} from "@mui/material";
@@ -10,13 +15,12 @@ import s from "./styles.module.css"
 
 export const Cards = () => {
     let {packId} = useParams<{ packId: string }>();
-    const [page , setPage] = useState(1)
-    const [pageCount , setPageCount] = useState(3)
-
+    const [page, setPage] = useState(1)
+    const [pageCount, setPageCount] = useState(3)
     const {data, isLoading, isError, error, refetch} = useGetCardsQuery({packId: packId ?? "", page, pageCount});
-
     const [addCard] = useAddCardMutation()
-    const [deleteCard,{isLoading: isDeletedLoading}] = useDeleteCardMutation()
+    const [deleteCard, {isLoading: isDeletedLoading}] = useDeleteCardMutation()
+    const [updateCard, {data: updatedCard}] = useUpdateCardMutation()
 
     if (isLoading || isDeletedLoading) return <LinearProgress color={"secondary"}/>
 
@@ -37,7 +41,7 @@ export const Cards = () => {
                     const cardQuestion = res.newCard.question;
                     toast.success(`Карточка ${cardQuestion} успешно добавлена`);
                 })
-                .catch((err)=> {
+                .catch((err) => {
                     toast.error(err.data.error)
                 })
         }
@@ -46,9 +50,13 @@ export const Cards = () => {
     const changePageHandler = (event: ChangeEvent<unknown>, page: number) => {
         setPage(page)
     };
-const deletedCardHandler = (cardId:string) => {
-    deleteCard(cardId)
-}
+    const deletedCardHandler = (cardId: string) => {
+        deleteCard(cardId)
+    }
+    const updateCardHandler = (card: CardType) => {
+        const newCard = { ...card, question: "💚 new question 💚", answer: "🧡 new answer🧡 " };
+        updateCard(newCard);
+    };
     return (
         <div>
             <h1>Cards</h1>
@@ -61,13 +69,14 @@ const deletedCardHandler = (cardId:string) => {
                             <div className={s.container} key={card._id}>
                                 <div>
                                     <b>Question: </b>
-                                    <p>{card.question}</p>{" "}
+                                    <p>{card.question}</p>{" ь"}
                                 </div>
                                 <div>
                                     <b>Answer: </b>
                                     <p>{card.answer}</p>{" "}
                                 </div>
-                                <button onClick={()=>deletedCardHandler(card._id)}>delete card</button>
+                                <button onClick={() => deletedCardHandler(card._id)}>delete card</button>
+                                <button onClick={() => updateCardHandler(card)}>update card</button>
                             </div>
                         );
                     })}
