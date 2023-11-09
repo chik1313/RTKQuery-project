@@ -69,7 +69,7 @@ export const Cards = () => {
                             <div className={s.container} key={card._id}>
                                 <div>
                                     <b>Question: </b>
-                                    <p>{card.question}</p>{" ь"}
+                                    <p>{card.question}</p>{" "}
                                 </div>
                                 <div>
                                     <b>Answer: </b>
