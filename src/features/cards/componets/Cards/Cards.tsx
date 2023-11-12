@@ -73,7 +73,7 @@ export const Cards = () => {
                                 </div>
                                 <div>
                                     <b>Answer: </b>
-                                    <p>{card.answer}</p>{" sss"}
+                                    <p>{card.answer}</p>{" "}
                                 </div>
                                 <button onClick={() => deletedCardHandler(card._id)}>delete card</button>
                                 <button onClick={() => updateCardHandler(card)}>update card</button>
