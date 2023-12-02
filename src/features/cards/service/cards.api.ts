@@ -56,7 +56,7 @@ export const cardsApi = createApi({
                 query: (card) => {
                     return {
                         method: "PUT",
-                        url: "cards/cafrd",
+                        url: "cards/card",
                         body: {
                             card,
                         },
