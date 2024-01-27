@@ -44,7 +44,7 @@ export const cardsApi = createApi({
                 query: (id) => {
                     return {
                         method: "DELETE",
-                        url: "cardSSSs/card",
+                        url: "cards/card",
                         params: {
                             id,
                         },
