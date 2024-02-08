@@ -19,7 +19,7 @@ export const cardsApi = createApi({
             getCards: build.query<FetchCardsResponseType, ArgGetCardsType>({
                 query: ({packId,page,pageCount}) => {
                     return {
-                        url: "cards/card",
+                        url: "cards/cccccard",
                         params: {
                             cardsPack_id: packId,
                             page,
