@@ -11,7 +11,7 @@ export const packsApi = {
 		});
 	},
   createPack: (cardsPack: ArgCreatePackType) => {
-    return instance.post<CreatePackResponseType>("cardsaaaa/pack", { cardsPack });
+    return instance.post<CreatePackResponseType>("cards/pack", { cardsPack });
   },
   removePack: (id: string) => {
     return instance.delete<RemovePackResponseType>(`cards/pack?id=${id}`);
